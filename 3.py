@@ -6,6 +6,9 @@
 # for every symbol check adjacent spaces for a number, reference that point in the 
 # number list to get the rest of the sequence. 
 
+# bug:
+# there are duplicate valid numbers so a set cant be used to deal with a symbol that
+# touches the same number twice
 grid = []
 numbers = []
 symbols = []
@@ -31,7 +34,7 @@ def main():
                 check_adjacent((x, y))
                 # if one of the adjacent points is a number
                 # find it in the numbers list, and get its immediate neighbors
-    print(valids)
+    
     ans = 0
     for num in valids:
         ans += int(num)
@@ -52,6 +55,7 @@ def get_number_string(point):
     valid = str(grid[x][y])
     valid = populate_left_of(point, valid)     
     valid = populate_right_of(point, valid)
+    print(valid)
     valids.add(valid)
 
 
