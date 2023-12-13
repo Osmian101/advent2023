@@ -9,10 +9,12 @@
 # bug:
 # there are duplicate valid numbers so a set cant be used to deal with a symbol that
 # touches the same number twice
+
+previous_valid = ""
 grid = []
 numbers = []
 symbols = []
-valids = set()
+valids = [] 
 adjacent_eight = [(-1, -1), (-1, 0), (-1, 1), 
                  (0, -1),           (0, 1),
                  (1, -1), (1, 0), (1, 1)]
@@ -51,13 +53,15 @@ def check_adjacent(base):
 
 
 def get_number_string(point):
+    global previous_valid
     x, y = point
     valid = str(grid[x][y])
     valid = populate_left_of(point, valid)     
     valid = populate_right_of(point, valid)
     print(valid)
-    valids.add(valid)
-
+    if (valid != previous_valid):
+        valids.append(valid)
+    previous_valid = valid
 
 def populate_left_of(point, string):
     x, y = point
