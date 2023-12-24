@@ -21,11 +21,12 @@ def main():
     print(totals)
     card_id = 1
     while (totals):
+        # this only goes one layer deep because popping means its not updated, but not removing it breaks the while loops
         bonus_cards = totals.pop("Card{:>4}".format(str(card_id)))
         print(bonus_cards)
         add_cards_to = range(1, bonus_cards[0] + 1)
-        for x in add_cards_to:
-            totals["Card{:>4}".format(str(card_id + x))].append(bonus_cards[0])
+        for x in add_cards_to:                                  # bonus_cards[0]
+            totals["Card{:>4}".format(str(card_id + x))].append(totals["Card{:>4}".format(str(card_id + x))][0])
         while (bonus_cards):
             #print(bonus_cards.pop(0))
             ans += bonus_cards.pop(0)
